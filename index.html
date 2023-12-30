@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khalil Krifi</title>
+    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+<header>
+    <div class="content">
+      <hgroup>
+        <h1>KrifiWorkPlace</h1>
+        <i>II-A Finance Project
+            by Khalil Krifi
+        </i>
+      </hgroup>
+    </div>
+    <div class="overlay"></div>
+  </header>
+  <section class="site">
+    <nav>
+      <a href="">Compte Epargne</a>
+    </nav>
+    <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size: 3em;">Compte Epargne </h5>
+              <!-- Table with stripped rows -->
+              <table class="table datatable" >
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Krifi Khalil</title>
+                <style>
+                  /* Add your custom styles here */
+                  table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-top: 20px;
+                  }
+
+                  th,
+                  td {
+                    border: 1px solid #541515;
+                    text-align: left;
+                    padding: 8px;
+                  }
+
+                  th {
+                    background-color: #f2f2f2;
+                  }
+                </style>
+                </head>
+
+                <body>
+
+                  <form id="Transaction">
+                    <table>
+                      <tr>
+                        <td><label for="Capitale" style="font-size: 1.5em;" >Capitale</label></td>
+                        <td><input type="number" id="Capitale" required></td>
+                        <br>
+                      </tr>
+                      <tr>
+                        <td><label for="Accountcreationdate" style="font-size: 1.5em;">Accountcreationdate:</label></td>
+                        <td><input type="date" id="Accountcreationdate" required></td>
+                        <br>
+                        </tr>
+                      <tr>
+                        <input type="submit" id='addAcc' class="submit-button" value="Create Account" onclick="createAccount()">          
+                      </tr>
+                      <tr>
+                      <td><label for="ID" style="font-size: 1.5em;">ID:</label></td>
+                      <td><input type="number" id="ID" required maxlength="8" ></td>
+                      <br>
+                    </tr>
+                      <tr>
+                        <td><label for="Nom" style="font-size: 1.5em;">Nom:</label></td>
+                        <td><input type="text" id="Nom" required></td>
+                        <br>
+                      </tr>
+                  </form>
+
+                  <form id="Transaction">
+                  </form>
+                  <table id='form' style="display: none;">
+                    <tr>
+                      <td><label for="dateop" style="font-size: 1.5em;">Date Operation: &emsp;</label>
+                      <td><input type="date" id="dateop" required></td>
+                      <br>
+                    </tr>
+                    <tr>
+
+                      <td><label for="Action" style="font-size: 1.5em;">Action:</label></td>
+                      <td><input type="number" id="Action" required></td>
+                      <br>
+                    </tr>
+                    <tr>
+
+                      <td><label for="Taux" style="font-size: 1.5em;">Taux:</label></td>
+                      <td><input type="number" id="Taux" required></td>
+                      <br>
+                      <input type="submit" id='addOp' class="submit-button" style="display: none;" value="Add Operation" onclick="addPerson2()">          
+                    </table>
+                  </form>
+
+                  <table id="Tablefinance" width="1000" style="display: none;">
+                    <thead border="10">
+                      <tr>
+                        <td style="font-size: 1.5em;">Date operation &emsp;</td>
+                        <td style="font-size: 1.5em;">&emsp;ID</td>
+                        <td style="font-size: 1.5em;">&emsp;Nom</td>
+                        <td style="font-size: 1.5em;">&emsp;Action</td>
+                        <td style="font-size: 1.5em;">&emsp;Solde</td>
+                        <td style="font-size: 1.5em;">&emsp;Date valeur</td>
+                        <td style="font-size: 1.5em;">&emsp;Nombre de jour</td>
+                        <td style="font-size: 1.5em;">&emsp;Taux</td>
+                        <td style="font-size: 1.5em;">&emsp;Interest</td>
+                      </tr>
+                    </thead>
+                    <tbody id="tbd">
+                      <!-- Table body will be dynamically populated -->
+                    </tbody>
+                  </table>
+
+                  <script>
+                    var id;
+                    var nom;
+                    var lastDateValeur;
+                    var capitale;
+                    var creation;
+                    function createAccount() {
+                      event.preventDefault();
+                      var creationIn = document.getElementById("Accountcreationdate");
+                      creationIn.disabled = true;
+                      creation = creationIn.value;
+                      lastDateValeur = new Date(creation);
+                      var capitaleIn = document.getElementById("Capitale");
+                      capitaleIn.disabled = true;
+                      capitale = Number(capitaleIn.value);
+                      document.getElementById("addAcc").style.display = "none";
+                      document.getElementById("addOp").style.display = "block";
+                      document.getElementById("form").style.display = "block";
+                      document.getElementById("Tablefinance").style.display = "block";
+
+                      var IDIn = document.getElementById('ID');
+                      id = IDIn.value;
+                      IDIn.disabled = true;
+                      var NomIn = document.getElementById('Nom');
+                      nom = NomIn.value;
+                      NomIn.disabled = true;
+                    }
+                    function addPerson2() {
+                      var dateOpIn = document.getElementById('dateop');
+
+                      var ActionIn = document.getElementById('Action');
+                      var TauxIn = document.getElementById('Taux');
+
+                      var action = Number(ActionIn.value);
+
+                      // Create a new row in the table
+                      var table = document.getElementById('Tablefinance');
+                      var newRow = table.insertRow(table.rows.length);
+                      var dateOp = new Date(dateOpIn.value);
+                      var DateCredit = new Date(dateOp.getTime() + 7 * 24 * 60 * 60 * 1000);
+                      var DateDebit = new Date(dateOp.getTime() - 7 * 24 * 60 * 60 * 1000);
+                      var dateValeur;
+                      if (action > 0) {
+                        dateValeur = DateCredit;
+                        capitale += action;
+                      }
+                      else if (action < 0) {
+                        dateValeur = DateDebit;
+                        capitale += action;
+                      }
+                      else{dateValeur=dateOp;}
+                      ;
+                      var nb_jours = Number(Math.abs(Math.floor((dateValeur.getTime() - lastDateValeur.getTime()) / (24 * 60 * 60 * 1000))) + 1);
+                      var taux = Number(TauxIn.value);
+                      var interest = ((capitale * taux * nb_jours) / 36000).toFixed(2);
+
+
+                      lastDateValeur = dateValeur;
+
+                      // Insert cells with input values
+                      var cell1 = newRow.insertCell(0);
+                      var cell2 = newRow.insertCell(1);
+                      var cell3 = newRow.insertCell(2);
+                      var cell4 = newRow.insertCell(3);
+                      var cell5 = newRow.insertCell(4);
+                      var cell6 = newRow.insertCell(5);
+                      var cell7 = newRow.insertCell(6);
+                      var cell8 = newRow.insertCell(7);
+                      var cell9 = newRow.insertCell(8);
+
+
+                      cell1.innerHTML = dateOp.toISOString().slice(0, 10);
+                      cell2.innerHTML = id;
+                      cell3.innerHTML = nom;
+                      cell4.innerHTML = action;
+                      cell5.innerHTML = capitale;
+                      cell6.innerHTML = dateValeur.toISOString().slice(0, 10);
+                      cell7.innerHTML = nb_jours;
+                      cell8.innerHTML = TauxIn.value;
+                      cell9.innerHTML = interest;
+
+                      // Clear input fields
+                      document.getElementById('dateop').value = '';
+                      document.getElementById('Action').value = '';
+                      document.getElementById('Taux').value = '';
+                      document.getElementById('Transaction').addEventListener('submit', function(event) {
+                          event.preventDefault();
+                          addPerson2(); // Call the function to add the new line
+                        });
+                                          
+                            }
+
+
+                  </script>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+  </section>
+</body>
+</html>
